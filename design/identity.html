@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Visual Identity — Abderrahman Kayouh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#050607;color:#E7ECF0;font-family:"Inter",sans-serif;line-height:1.6;padding:clamp(1.25rem,5vw,4rem)}
+  .wrap{max-width:1240px;margin-inline:auto}
+  .mono{font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem}
+  h1{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(2rem,1rem+4vw,3.4rem);letter-spacing:-.03em;line-height:1.05}
+  h2{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.6rem;letter-spacing:-.02em}
+  .sub{color:#8A949B;max-width:64ch;margin-top:.75rem}
+  section{margin-top:clamp(2.5rem,6vw,4.5rem)}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:1.5rem;margin-top:1.5rem}
+  .card{border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.08);position:relative}
+  .head{padding:1.5rem 1.5rem .4rem;position:relative;overflow:hidden}
+  .glowdemo{position:absolute;inset:0;pointer-events:none;opacity:.9}
+  .tag{font-family:"JetBrains Mono",monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}
+  .name{font-family:"Space Grotesk",sans-serif;font-size:1.5rem;font-weight:600;margin:.35rem 0 .05rem;letter-spacing:-.01em;position:relative}
+  .mood{font-size:.85rem;position:relative}
+  .rec{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:.25em .6em;border-radius:99px;margin-left:.5rem;vertical-align:middle}
+  .swrow{display:flex;gap:.35rem;padding:1.1rem 1.5rem .3rem;flex-wrap:wrap}
+  .sw{display:flex;flex-direction:column;gap:.3rem;font-family:"JetBrains Mono",monospace;font-size:.52rem;color:#8A949B}
+  .chip{height:40px;width:52px;border-radius:7px;border:1px solid rgba(255,255,255,.1)}
+  .grad{height:12px;margin:.7rem 1.5rem 0;border-radius:99px}
+  .demo{margin:1.2rem 1.5rem 1.5rem;border-radius:14px;padding:1.3rem;position:relative;overflow:hidden}
+  .demo .brackets::before,.demo .brackets::after{content:"";position:absolute;width:14px;height:14px;opacity:.6}
+  .demo .brackets::before{top:8px;left:8px;border-top:1px solid;border-left:1px solid}
+  .demo .brackets::after{bottom:8px;right:8px;border-bottom:1px solid;border-right:1px solid}
+  .demo .k{font-family:"JetBrains Mono",monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase}
+  .demo h4{font-family:"Space Grotesk",sans-serif;font-size:1.2rem;margin:.4rem 0 .5rem;letter-spacing:-.01em}
+  .demo p{font-size:.82rem;margin-bottom:1rem;opacity:.8}
+  .btn{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:.6em 1.15em;border-radius:99px}
+  .why{padding:0 1.5rem 1.5rem;font-size:.82rem;color:#9aa4ab}
+  .why b{color:#cfd6db}
+  .vl{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:1.25rem}
+  .vlc{border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.4rem;background:#0a0c0f}
+  .vlc .n{font-family:"JetBrains Mono",monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:#6E7B85}
+  .vlc h3{font-family:"Space Grotesk",sans-serif;font-size:1.05rem;margin:.35rem 0 .5rem;letter-spacing:-.01em}
+  .vlc p{font-size:.83rem;color:#9aa4ab}
+  .radius-demo{display:flex;gap:.6rem;margin-top:.9rem;align-items:flex-end}
+  .rd{background:#1a1e24;border:1px solid #2c333b}
+  .space-demo{display:flex;gap:.4rem;align-items:flex-end;margin-top:.9rem;height:44px}
+  .space-demo i{background:linear-gradient(#3a4650,#222a31);width:16px;border-radius:3px}
+  .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);margin:clamp(2rem,5vw,3.5rem) 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="mono" style="color:#8FA0AD">Visual identity · 4 systems + design language · for approval</p>
+  <h1 style="margin-top:.6rem">A timeless identity — not another AI portfolio.</h1>
+  <p class="sub">Four complete color systems, each escaping the generic cyan/violet SaaS look in a different way. Every one is a full system (background · surfaces · borders · text · primary · secondary · glow · gradient), engineered for AA contrast in dark mode with a light counterpart to follow. Design psychology and a recommendation are in the chat.</p>
+
+  <section>
+    <h2>01 · Color systems</h2>
+    <div class="grid2">
+
+      <!-- A: INK BLUEPRINT -->
+      <div class="card" style="background:#0A111A">
+        <div class="head">
+          <div class="glowdemo" style="background:radial-gradient(50% 80% at 85% 10%, rgba(87,182,201,.28), transparent 70%),radial-gradient(40% 70% at 10% 100%, rgba(232,162,76,.16), transparent 70%)"></div>
+          <span class="tag" style="color:#57B6C9">Direction A</span>
+          <div class="name">Ink Blueprint <span class="rec" style="background:#12212c;color:#7FD1D8;border:1px solid #23485a">★ recommended</span></div>
+          <div class="mood" style="color:#92A3B2">Engineering · precise · timeless</div>
+        </div>
+        <div class="swrow">
+          <div class="sw"><span class="chip" style="background:#0A111A"></span>bg</div>
+          <div class="sw"><span class="chip" style="background:#101C28"></span>surface</div>
+          <div class="sw"><span class="chip" style="background:#182A3A"></span>surf-2</div>
+          <div class="sw"><span class="chip" style="background:#23384A"></span>line</div>
+          <div class="sw"><span class="chip" style="background:#57B6C9"></span>primary</div>
+          <div class="sw"><span class="chip" style="background:#E8A24C"></span>accent</div>
+          <div class="sw"><span class="chip" style="background:#EDF1F4"></span>text</div>
+        </div>
+        <div class="grad" style="background:linear-gradient(100deg,#57B6C9,#7FD1D8 55%,#E8A24C)"></div>
+        <div class="demo" style="background:#101C28;color:#EDF1F4">
+          <span class="brackets" style="color:#57B6C9"></span>
+          <div class="k" style="color:#57B6C9">// hero.tsx</div>
+          <h4>Engineered intelligence.</h4>
+          <p style="color:#92A3B2">From research question to production system.</p>
+          <span class="btn" style="background:#E8A24C;color:#1a1206">View work ↗</span>
+          <span class="btn" style="border:1px solid #23384A;color:#EDF1F4;margin-left:.4rem">Resume</span>
+        </div>
+        <div class="why"><b>Blueprint navy + steel-cyan + amber ember.</b> The heritage of engineering drawings — cool precision warmed by a single human accent. Reads “builder who thinks,” ages like a classic, and the amber is what no other AI portfolio has.</div>
+      </div>
+
+      <!-- B: OBSIDIAN CHAMPAGNE -->
+      <div class="card" style="background:#0B0B0D">
+        <div class="head">
+          <div class="glowdemo" style="background:radial-gradient(50% 80% at 85% 10%, rgba(216,185,140,.22), transparent 70%),radial-gradient(40% 70% at 10% 100%, rgba(128,145,166,.14), transparent 70%)"></div>
+          <span class="tag" style="color:#D8B98C">Direction B</span>
+          <div class="name">Obsidian &amp; Champagne</div>
+          <div class="mood" style="color:#9C978E">Leadership · prestige · warm</div>
+        </div>
+        <div class="swrow">
+          <div class="sw"><span class="chip" style="background:#0B0B0D"></span>bg</div>
+          <div class="sw"><span class="chip" style="background:#141417"></span>surface</div>
+          <div class="sw"><span class="chip" style="background:#1E1E22"></span>surf-2</div>
+          <div class="sw"><span class="chip" style="background:#2A2A2F"></span>line</div>
+          <div class="sw"><span class="chip" style="background:#D8B98C"></span>primary</div>
+          <div class="sw"><span class="chip" style="background:#8091A6"></span>second</div>
+          <div class="sw"><span class="chip" style="background:#F2EFEA"></span>text</div>
+        </div>
+        <div class="grad" style="background:linear-gradient(100deg,#E4C79A,#D8B98C 55%,#8091A6)"></div>
+        <div class="demo" style="background:#141417;color:#F2EFEA">
+          <span class="brackets" style="color:#D8B98C"></span>
+          <div class="k" style="color:#D8B98C">// hero.tsx</div>
+          <h4>Building the future.</h4>
+          <p style="color:#9C978E">Engineer. Researcher. Leader.</p>
+          <span class="btn" style="background:#D8B98C;color:#1a1206">View work ↗</span>
+          <span class="btn" style="border:1px solid #2A2A2F;color:#F2EFEA;margin-left:.4rem">Resume</span>
+        </div>
+        <div class="why"><b>Graphite + champagne gold + cool steel.</b> Gold is the language of mastery and leadership — almost unheard of in AI portfolios, so it's instantly memorable. The steel-blue secondary keeps it technical, not luxury-brand. Boldest, most “future leader.”</div>
+      </div>
+
+      <!-- C: PHOSPHOR SIGNAL -->
+      <div class="card" style="background:#0A0D0B">
+        <div class="head">
+          <div class="glowdemo" style="background:radial-gradient(50% 80% at 85% 10%, rgba(95,208,138,.24), transparent 70%),radial-gradient(40% 70% at 10% 100%, rgba(216,200,154,.12), transparent 70%)"></div>
+          <span class="tag" style="color:#5FD08A">Direction C</span>
+          <div class="name">Phosphor Signal</div>
+          <div class="mood" style="color:#93A398">Data · systems · heritage</div>
+        </div>
+        <div class="swrow">
+          <div class="sw"><span class="chip" style="background:#0A0D0B"></span>bg</div>
+          <div class="sw"><span class="chip" style="background:#0F1512"></span>surface</div>
+          <div class="sw"><span class="chip" style="background:#182119"></span>surf-2</div>
+          <div class="sw"><span class="chip" style="background:#26332A"></span>line</div>
+          <div class="sw"><span class="chip" style="background:#5FD08A"></span>primary</div>
+          <div class="sw"><span class="chip" style="background:#D8C89A"></span>accent</div>
+          <div class="sw"><span class="chip" style="background:#E9EFE9"></span>text</div>
+        </div>
+        <div class="grad" style="background:linear-gradient(100deg,#5FD08A,#8FE0A0 55%,#D8C89A)"></div>
+        <div class="demo" style="background:#0F1512;color:#E9EFE9">
+          <span class="brackets" style="color:#5FD08A"></span>
+          <div class="k" style="color:#5FD08A">// hero.tsx</div>
+          <h4>Systems that learn.</h4>
+          <p style="color:#93A398">Data pipelines · models · production.</p>
+          <span class="btn" style="background:#5FD08A;color:#06180e">View work ↗</span>
+          <span class="btn" style="border:1px solid #26332A;color:#E9EFE9;margin-left:.4rem">Resume</span>
+        </div>
+        <div class="why"><b>Charcoal + refined signal-green + warm bone.</b> Green is the colour of terminals, growth, and data — heritage that predates the trend and sidesteps the cyan crowd entirely. Refined (not neon gamer-green) it reads “data scientist / systems engineer.”</div>
+      </div>
+
+      <!-- D: HALCYON -->
+      <div class="card" style="background:#0C0B0A">
+        <div class="head">
+          <div class="glowdemo" style="background:radial-gradient(50% 80% at 85% 10%, rgba(147,192,230,.22), transparent 70%),radial-gradient(40% 70% at 10% 100%, rgba(224,169,140,.14), transparent 70%)"></div>
+          <span class="tag" style="color:#93C0E6">Direction D</span>
+          <div class="name">Halcyon</div>
+          <div class="mood" style="color:#A69E90">Calm · editorial · warm-premium</div>
+        </div>
+        <div class="swrow">
+          <div class="sw"><span class="chip" style="background:#0C0B0A"></span>bg</div>
+          <div class="sw"><span class="chip" style="background:#15130F"></span>surface</div>
+          <div class="sw"><span class="chip" style="background:#201C16"></span>surf-2</div>
+          <div class="sw"><span class="chip" style="background:#2E2A22"></span>line</div>
+          <div class="sw"><span class="chip" style="background:#93C0E6"></span>primary</div>
+          <div class="sw"><span class="chip" style="background:#E0A98C"></span>accent</div>
+          <div class="sw"><span class="chip" style="background:#F4F1EA"></span>text</div>
+        </div>
+        <div class="grad" style="background:linear-gradient(100deg,#93C0E6,#B9D4E8 55%,#E0A98C)"></div>
+        <div class="demo" style="background:#15130F;color:#F4F1EA">
+          <span class="brackets" style="color:#93C0E6"></span>
+          <div class="k" style="color:#93C0E6">// hero.tsx</div>
+          <h4>Clarity at scale.</h4>
+          <p style="color:#A69E90">Intelligent systems, thoughtfully built.</p>
+          <span class="btn" style="background:#93C0E6;color:#08161f">View work ↗</span>
+          <span class="btn" style="border:1px solid #2E2A22;color:#F4F1EA;margin-left:.4rem">Resume</span>
+        </div>
+        <div class="why"><b>Warm near-black + glacier blue + soft clay.</b> Almost every AI site uses a cold blue-black; a warm espresso-black with a calm cool accent feels editorial and expensive (the Apple/Kinfolk register). Most understated and timeless.</div>
+      </div>
+
+    </div>
+    <p class="mono" style="color:#5c666c;margin-top:1rem">Swatch order · background → surface → surface-2 → line → primary → secondary/accent → text</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- VISUAL LANGUAGE -->
+  <section>
+    <h2>02 · Visual language (applies to every palette)</h2>
+    <p class="sub">The system that makes it recognisable and coherent — memorable through consistency, not decoration.</p>
+    <div class="vl">
+      <div class="vlc">
+        <div class="n">Signature glow</div>
+        <h3>Directional aurora light</h3>
+        <p>Soft, low-opacity radial glows in the primary colour — treated as a <b style="color:#cfd6db">light source</b>, never neon. Max two per viewport, always from the same angle.</p>
+        <div style="height:60px;margin-top:.8rem;border-radius:10px;background:radial-gradient(60% 100% at 85% 0%,rgba(120,170,200,.35),transparent 70%),#0d1116;border:1px solid #222"></div>
+      </div>
+      <div class="vlc">
+        <div class="n">Geometric motif</div>
+        <h3>Registration brackets</h3>
+        <p>Thin 1px corner brackets and tick-marks borrowed from drafting/blueprints frame key cards. A quiet signature — used to frame, never to fill.</p>
+        <div style="height:60px;margin-top:.8rem;border-radius:10px;position:relative;background:#0d1116;border:1px solid #222">
+          <span style="position:absolute;top:8px;left:8px;width:14px;height:14px;border-top:1px solid #78aac8;border-left:1px solid #78aac8"></span>
+          <span style="position:absolute;bottom:8px;right:8px;width:14px;height:14px;border-bottom:1px solid #78aac8;border-right:1px solid #78aac8"></span>
+        </div>
+      </div>
+      <div class="vlc">
+        <div class="n">Background</div>
+        <h3>Blueprint grid, faded</h3>
+        <p>A near-invisible grid that only appears near light sources (radial mask). The background is a <b style="color:#cfd6db">stage</b>, never a subject.</p>
+        <div style="height:60px;margin-top:.8rem;border-radius:10px;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:16px 16px;background-color:#0d1116;-webkit-mask-image:radial-gradient(80% 100% at 50% 0,#000,transparent);border:1px solid #222"></div>
+      </div>
+      <div class="vlc">
+        <div class="n">Radius &amp; borders</div>
+        <h3>One hairline, one radius scale</h3>
+        <p>Single 1px <code>--line</code> border everywhere. Radius: 8 (inset) · 12 (cards) · 18 (media) · full (pills). Slightly engineered, never bubbly.</p>
+        <div class="radius-demo">
+          <span class="rd" style="width:34px;height:34px;border-radius:8px"></span>
+          <span class="rd" style="width:40px;height:40px;border-radius:12px"></span>
+          <span class="rd" style="width:46px;height:46px;border-radius:18px"></span>
+          <span class="rd" style="width:34px;height:34px;border-radius:99px"></span>
+        </div>
+      </div>
+      <div class="vlc">
+        <div class="n">Spacing rhythm</div>
+        <h3>4px base · 8-point scale</h3>
+        <p>Consistent 4/8/12/16/24/32px steps; sections breathe at 96–128px; text measure ~66ch. Whitespace does the luxury work.</p>
+        <div class="space-demo"><i style="height:10px"></i><i style="height:16px"></i><i style="height:22px"></i><i style="height:30px"></i><i style="height:40px"></i></div>
+      </div>
+      <div class="vlc">
+        <div class="n">Lighting direction</div>
+        <h3>One light, top-right</h3>
+        <p>All glows originate top-right; subtle shadows fall bottom-left. A single consistent light source makes the whole page feel physically real.</p>
+        <div style="height:60px;margin-top:.8rem;border-radius:10px;background:#0d1116;border:1px solid #222;box-shadow:inset -18px 18px 30px -20px rgba(150,190,220,.4),inset 10px -10px 24px -18px rgba(0,0,0,.8)"></div>
+      </div>
+    </div>
+  </section>
+</div>
+</body>
+</html>

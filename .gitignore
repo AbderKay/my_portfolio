@@ -1,0 +1,45 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# next.js build output
+/.next/
+/out/
+/build
+/dist
+*.tsbuildinfo
+next-env.d.ts
+
+# environment variables (never commit real secrets)
+.env
+.env.*
+!.env.example
+
+# vercel
+.vercel
+
+# local tooling (kept out of the repo)
+/CLAUDE.md
+/.claude/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.pem
+*.swp
+*.swo
+*~
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# NOTE: public/ IS committed on purpose — a portfolio needs its images.
+# Everything under public/ is served publicly by the live site.

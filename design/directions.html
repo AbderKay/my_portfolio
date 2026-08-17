@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Design Directions — Abderrahman Kayouh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Sora:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#050609;color:#E7ECF0;font-family:"Inter",sans-serif;line-height:1.6;padding:clamp(1.25rem,5vw,4rem);}
+  .mono{font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.14em;font-size:.72rem}
+  h1{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(2rem,1rem+4vw,3.4rem);letter-spacing:-.03em;line-height:1.05}
+  h2{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1.5rem;letter-spacing:-.02em}
+  .sub{color:#8A949B;max-width:60ch;margin-top:.75rem}
+  .wrap{max-width:1200px;margin-inline:auto}
+  .lead{color:#6EE7FF}
+  section{margin-top:clamp(2.5rem,6vw,4.5rem)}
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}
+  .dir{border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.08);position:relative}
+  .dir .top{padding:1.4rem 1.4rem .2rem}
+  .dir .tag{font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+  .dir h3{font-family:"Space Grotesk",sans-serif;font-size:1.35rem;font-weight:600;margin:.35rem 0 .1rem;letter-spacing:-.01em}
+  .dir .mood{font-size:.85rem;color:#9aa4ab}
+  .swatches{display:flex;gap:.4rem;padding:1rem 1.4rem}
+  .sw{height:44px;flex:1;border-radius:8px;border:1px solid rgba(255,255,255,.09)}
+  .grad{height:12px;margin:0 1.4rem;border-radius:99px}
+  .mock{margin:1.1rem 1.4rem 1.4rem;border-radius:14px;padding:1.2rem;border:1px solid rgba(255,255,255,.08)}
+  .mock .k{font-family:"JetBrains Mono",monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;opacity:.65}
+  .mock h4{font-family:"Space Grotesk",sans-serif;font-size:1.15rem;margin:.4rem 0 .5rem;letter-spacing:-.01em}
+  .mock p{font-size:.8rem;opacity:.75;margin-bottom:.9rem}
+  .btn{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:.55em 1.1em;border-radius:99px}
+  .why{padding:0 1.4rem 1.4rem;font-size:.82rem;color:#9aa4ab}
+  .why b{color:#cfd6db;font-weight:600}
+  .orbit{width:60px;height:60px;border-radius:50%;position:relative;margin-bottom:.8rem}
+  .orbit::before,.orbit::after{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid;opacity:.5}
+  .orbit::after{inset:-8px;opacity:.25}
+  .rec{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;background:#1a2531;color:#6EE7FF;border:1px solid #234; padding:.25em .6em;border-radius:99px;margin-left:.5rem;vertical-align:middle}
+  .type-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1.25rem}
+  .type{border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1.3rem;background:#0a0c11}
+  .type .big{font-size:2.1rem;letter-spacing:-.02em;margin-bottom:.3rem}
+  .note{font-size:.85rem;color:#8A949B;margin-top:.4rem}
+  ul.clean{list-style:none;margin-top:1rem;display:grid;gap:.5rem}
+  ul.clean li{padding-left:1.2rem;position:relative;color:#aeb6bc;font-size:.9rem}
+  ul.clean li::before{content:"▸";position:absolute;left:0;color:#6EE7FF}
+  .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);margin:clamp(2rem,5vw,3.5rem) 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="mono lead">Design Directions · v1 · for approval</p>
+  <h1 style="margin-top:.6rem">Visual identity — pick a direction.</h1>
+  <p class="sub">Three complete, futuristic color systems built from your brief (deep navy · rich black · graphite · electric blue · cyan · violet · restrained neon). Each is a full system — background, surfaces, primary, secondary accent, and signature gradient — not just a hue. All are dark-first, with a matching light mode designed separately (not inverted).</p>
+
+  <!-- COLOR SYSTEMS -->
+  <section>
+    <h2>01 · Color systems</h2>
+    <div class="grid3" style="margin-top:1.25rem">
+
+      <!-- A -->
+      <div class="dir" style="background:#05070D">
+        <div class="top">
+          <div class="orbit" style="background:radial-gradient(circle at 40% 40%,#3B82F6,#0b1220);border-color:#3B82F6"></div>
+          <span class="tag" style="color:#22D3EE">Direction A</span>
+          <h3>Neural Cyan</h3>
+          <div class="mood">Electric · technical · clean</div>
+        </div>
+        <div class="swatches">
+          <div class="sw" style="background:#05070D" title="#05070D bg"></div>
+          <div class="sw" style="background:#0C1119" title="surface"></div>
+          <div class="sw" style="background:#16202E" title="surface-2"></div>
+          <div class="sw" style="background:#3B82F6" title="#3B82F6 primary"></div>
+          <div class="sw" style="background:#22D3EE" title="#22D3EE cyan"></div>
+          <div class="sw" style="background:#E8F1FA" title="text"></div>
+        </div>
+        <div class="grad" style="background:linear-gradient(90deg,#3B82F6,#22D3EE)"></div>
+        <div class="mock" style="background:#0C1119">
+          <div class="k" style="color:#22D3EE">// hero.tsx</div>
+          <h4>Building intelligent systems.</h4>
+          <p>MLOps · Data Engineering · Research</p>
+          <span class="btn" style="background:linear-gradient(90deg,#3B82F6,#22D3EE);color:#04121a">View work ↗</span>
+        </div>
+        <div class="why"><b>Why it works:</b> reads instantly as “data / ML platform” — the Vercel/Linear register, but more electric. Safest, most professional, most on-brand for an ML/Data engineer.</div>
+      </div>
+
+      <!-- B -->
+      <div class="dir" style="background:#070512">
+        <div class="top">
+          <div class="orbit" style="background:radial-gradient(circle at 40% 40%,#8B5CF6,#140b22);border-color:#8B5CF6"></div>
+          <span class="tag" style="color:#C084FC">Direction B</span>
+          <h3>Quantum Violet</h3>
+          <div class="mood">Frontier · GenAI · creative</div>
+        </div>
+        <div class="swatches">
+          <div class="sw" style="background:#070512"></div>
+          <div class="sw" style="background:#0E0A1C"></div>
+          <div class="sw" style="background:#1A1330"></div>
+          <div class="sw" style="background:#6366F1"></div>
+          <div class="sw" style="background:#A855F7"></div>
+          <div class="sw" style="background:#EDE9FB"></div>
+        </div>
+        <div class="grad" style="background:linear-gradient(90deg,#6366F1,#A855F7,#22D3EE)"></div>
+        <div class="mock" style="background:#0E0A1C">
+          <div class="k" style="color:#C084FC">// hero.tsx</div>
+          <h4>Building the future with AI.</h4>
+          <p>LLMs · RAG · Applied Research</p>
+          <span class="btn" style="background:linear-gradient(90deg,#6366F1,#A855F7);color:#0d0720">View work ↗</span>
+        </div>
+        <div class="why"><b>Why it works:</b> the blue→violet of your reference, pushed darker and more premium. Signals “generative AI / innovation.” Most distinctive and creative — leans entrepreneur/visionary.</div>
+      </div>
+
+      <!-- C -->
+      <div class="dir" style="background:#08090C">
+        <div class="top">
+          <div class="orbit" style="background:radial-gradient(circle at 40% 40%,#2DD4BF,#0a1512);border-color:#7C6FF0"></div>
+          <span class="tag" style="color:#2DD4BF">Direction C <span class="rec">recommended</span></span>
+          <h3>Graphite Aurora</h3>
+          <div class="mood">Mature · premium · leader</div>
+        </div>
+        <div class="swatches">
+          <div class="sw" style="background:#08090C"></div>
+          <div class="sw" style="background:#0E1014"></div>
+          <div class="sw" style="background:#171A20"></div>
+          <div class="sw" style="background:#2DD4BF"></div>
+          <div class="sw" style="background:#7C6FF0"></div>
+          <div class="sw" style="background:#EAEEF2"></div>
+        </div>
+        <div class="grad" style="background:linear-gradient(90deg,#2DD4BF,#38BDF8,#7C6FF0)"></div>
+        <div class="mock" style="background:#0E1014">
+          <div class="k" style="color:#2DD4BF">// hero.tsx</div>
+          <h4>Engineer. Researcher. Leader.</h4>
+          <p>From notebook to production</p>
+          <span class="btn" style="background:linear-gradient(90deg,#2DD4BF,#7C6FF0);color:#04140f">View work ↗</span>
+        </div>
+        <div class="why"><b>Why it works:</b> graphite base with a dual cyan→violet “aurora” used only as soft glow. Balances all three pillars — the Anthropic/Apple restraint that reads senior, not flashy. My pick for you.</div>
+      </div>
+
+    </div>
+    <p class="note">Swatch order in each: <b>background → surface → surface-2 → primary → secondary accent → text</b>. Gradient bar = the signature gradient used for CTAs, glows, and hero lighting (sparingly).</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TYPOGRAPHY -->
+  <section>
+    <h2>02 · Typography</h2>
+    <p class="sub">The reference uses only Inter — clean but generic. A display/body/mono trio adds a memorable, engineered character without hurting readability.</p>
+    <div class="type-row">
+      <div class="type">
+        <div class="big" style="font-family:'Space Grotesk'">Space Grotesk</div>
+        <div class="mono" style="color:#22D3EE">Display / headings</div>
+        <p class="note">Geometric grotesk with subtle technical quirks. Reads “intelligent + engineered.” Already installed.</p>
+      </div>
+      <div class="type">
+        <div class="big" style="font-family:'Sora'">Sora — alt display</div>
+        <div class="mono" style="color:#7C6FF0">Optional upgrade</div>
+        <p class="note">Rounder, more futuristic/AI feel. Swap-in option if you want softer, more “product” headings.</p>
+      </div>
+      <div class="type">
+        <div class="big" style="font-family:'Inter'">Inter</div>
+        <div class="mono" style="color:#8A949B">Body text</div>
+        <p class="note">The gold standard for UI readability. Stays as the body workhorse.</p>
+      </div>
+      <div class="type">
+        <div class="big" style="font-family:'JetBrains Mono';font-size:1.6rem">JetBrains Mono</div>
+        <div class="mono" style="color:#2DD4BF">Labels / code motif</div>
+        <p class="note">Powers the // section numbers, file-name tags, and terminal accents — the “engineer” signal.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- MOTION -->
+  <section>
+    <h2>03 · Motion &amp; interaction stack</h2>
+    <p class="sub">You asked for GSAP used extensively. My senior recommendation is a two-engine setup — each doing what it's best at — rather than replacing what already works.</p>
+    <ul class="clean">
+      <li><b style="color:#e7ecf0">Lenis</b> — buttery smooth-scroll. This is the single biggest “premium feel” unlock; it's the secret behind most Awwwards sites.</li>
+      <li><b style="color:#e7ecf0">GSAP + ScrollTrigger</b> — scroll storytelling: pinned sections, parallax, text/line reveals, timeline draw-in, image reveals, magnetic buttons.</li>
+      <li><b style="color:#e7ecf0">Framer Motion</b> — kept for React state animation: theme toggle, project filter, mobile menu, layout shifts (it's declarative and already wired).</li>
+      <li><b style="color:#e7ecf0">Hero neural field</b> — SVG/Canvas particle-graph with mouse parallax (not Three.js by default — 90% of the wow at a fraction of the cost; Three.js only if you want true 3D).</li>
+      <li><b style="color:#e7ecf0">Guardrails</b> — everything honors <code>prefers-reduced-motion</code>, throttles on mobile, and targets 60fps (transform/opacity only).</li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>

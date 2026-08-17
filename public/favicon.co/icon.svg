@@ -1,0 +1,39 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AK monogram">
+  <defs>
+    <!-- Aurora gradient: steel-cyan -> violet -> amber (portfolio brand) -->
+    <linearGradient id="aurora" x1="96" y1="112" x2="416" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#57b6c9"/>
+      <stop offset="0.55" stop-color="#7c5cff"/>
+      <stop offset="1" stop-color="#e8a24c"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.10"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- squircle base -->
+  <rect x="16" y="16" width="480" height="480" rx="116" fill="#0a111a"/>
+  <rect x="16" y="16" width="480" height="480" rx="116" fill="url(#sheen)"/>
+  <rect x="16.5" y="16.5" width="479" height="479" rx="115.5" fill="none" stroke="url(#aurora)" stroke-opacity="0.35" stroke-width="3"/>
+
+  <!-- circuit node accents -->
+  <g fill="url(#aurora)" opacity="0.55">
+    <circle cx="126" cy="150" r="9"/>
+    <circle cx="386" cy="356" r="9"/>
+  </g>
+  <path d="M126 150 L126 210 M386 356 L386 300" stroke="url(#aurora)" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+
+  <!-- bold geometric 'A' mark -->
+  <g filter="url(#glow)">
+    <path d="M158 372 L256 150 L354 372" fill="none" stroke="url(#aurora)" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M200 300 L312 300" fill="none" stroke="url(#aurora)" stroke-width="46" stroke-linecap="round"/>
+  </g>
+
+  <!-- signature accent dot -->
+  <circle cx="388" cy="372" r="26" fill="#e8a24c"/>
+</svg>
