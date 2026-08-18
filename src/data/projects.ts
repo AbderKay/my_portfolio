@@ -449,13 +449,13 @@ const PROJECT_ORDER = [
   "rag_extraction.py", // Vala Bleu Ops Copilot
   "tomatosort.py", // TomatoSort
   "autoexpert.js", // AutoExpert
-  "ah_chat_digital.py", // AH-Chat
   "hotel_system.sql", // Hotel Management
   "supplychain_bi.pbix", // Supply Chain BI
+  "ah_chat_digital.py", // AH-Chat
   // Research & Experimental Work
-  "prescription_ocr.py", // Medical Prescription OCR (Research Draft)
-  "sentinel_finance.py", // ALM Surrender Risk
+  "prescription_ocr.py", // Research Draft
   "shark_tag.ipynb", // NASA Smart Shark Behaviour Tag
+  "sentinel_finance.py", // ALM Surrender Risk
 ];
 
 // Projects that belong to the "Research & Experimental Work" group.
