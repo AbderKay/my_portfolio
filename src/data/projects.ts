@@ -30,6 +30,8 @@ export type Project = {
   embedFrameable?: boolean;
   /** Teammates shown under a "See more" toggle on the card (names, universal). */
   collaborators?: string[];
+  /** Section group. Set automatically on export from RESEARCH_FILES. */
+  group?: "engineering" | "research";
 };
 
 const GITHUB: Loc = { en: "GitHub", fr: "GitHub" };
@@ -439,26 +441,38 @@ const projectList: Project[] = [
   },
 ];
 
-// Display order for the Projects section (by `file`). AutoExpert → TomatoSort →
-// Vala Bleu → Moroccan OCR → NASA → ALM → Hotel → the rest. Anything not listed
-// falls to the end in its original order.
+// Display order within each group (by `file`).
+//  Engineering: Vala Bleu → TomatoSort → AutoExpert → AH-Chat → Hotel → Supply Chain
+//  Research:    Medical Prescription OCR → ALM Surrender Risk → NASA Shark Tag
 const PROJECT_ORDER = [
-  "autoexpert.js",
-  "tomatosort.py",
+  // Engineering Projects
   "rag_extraction.py", // Vala Bleu Ops Copilot
-  "prescription_ocr.py", // Research Draft (R&D)
-  "shark_tag.ipynb", // NASA
-  "hotel_system.sql", // Hotel Management — before ALM
+  "tomatosort.py", // TomatoSort
+  "autoexpert.js", // AutoExpert
+  "ah_chat_digital.py", // AH-Chat
+  "hotel_system.sql", // Hotel Management
+  "supplychain_bi.pbix", // Supply Chain BI
+  // Research & Experimental Work
+  "prescription_ocr.py", // Medical Prescription OCR (Research Draft)
   "sentinel_finance.py", // ALM Surrender Risk
-  "supplychain_bi.pbix",
-  "ah_chat_digital.py",
+  "shark_tag.ipynb", // NASA Smart Shark Behaviour Tag
 ];
+
+// Projects that belong to the "Research & Experimental Work" group.
+const RESEARCH_FILES = new Set([
+  "prescription_ocr.py",
+  "sentinel_finance.py",
+  "shark_tag.ipynb",
+]);
 
 const rank = (file: string) => {
   const i = PROJECT_ORDER.indexOf(file);
   return i === -1 ? PROJECT_ORDER.length : i;
 };
 
-export const projects: Project[] = [...projectList].sort(
-  (a, b) => rank(a.file) - rank(b.file)
-);
+export const projects: Project[] = [...projectList]
+  .sort((a, b) => rank(a.file) - rank(b.file))
+  .map((p) => ({
+    ...p,
+    group: RESEARCH_FILES.has(p.file) ? "research" : "engineering",
+  }));

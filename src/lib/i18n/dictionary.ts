@@ -9,13 +9,14 @@ import type { Lang } from "./config";
 export type UIDict = {
   nav: { about: string; skills: string; projects: string; experience: string; leadership: string; contact: string; menu: string; close: string };
   langToggle: { label: string; toEnglish: string; toFrench: string };
-  hero: { welcome: string; viewCv: string; contactMe: string };
+  hero: { welcome: string; viewCv: string; contactMe: string; seeking: string; domains: string; availability: string };
   sections: Record<
     "about" | "skills" | "projects" | "experience" | "certifications" | "leadership" | "contact",
     { slug: string; title: string; subtitle?: string }
   >;
   about: { whoami: Record<"name" | "role" | "location" | "email" | "status", string> };
-  projects: { all: string; solves: string; stack: string; liveDemo: string; screenshots: string; seeMore: string; seeLess: string; collaborators: string; categories: Record<string, string> };
+  projects: { all: string; solves: string; stack: string; liveDemo: string; screenshots: string; seeMore: string; seeLess: string; collaborators: string; engineeringTitle: string; engineeringSubtitle: string; researchTitle: string; researchSubtitle: string; categories: Record<string, string> };
+  researchInterests: { title: string; subtitle: string; items: string[] };
   embed: { live: string; open: string; liveDemo: string; preview: string; startDemo: string; openNewTab: string };
   timeline: { experience: string; education: string; report: string };
   certs: { certificate: string; viewCertificate: string };
@@ -28,7 +29,14 @@ export type UIDict = {
 const en: UIDict = {
   nav: { about: "About", skills: "Skills", projects: "Projects", experience: "Experience", leadership: "Leadership", contact: "Contact", menu: "[ menu ]", close: "[ close ]" },
   langToggle: { label: "Language", toEnglish: "Switch to English", toFrench: "Passer en français" },
-  hero: { welcome: "Hi, I'm — welcome to my portfolio", viewCv: "View CV", contactMe: "Contact Me" },
+  hero: {
+    welcome: "Hi, I'm — welcome to my portfolio",
+    viewCv: "View CV",
+    contactMe: "Contact Me",
+    seeking: "Seeking a 6-month PFE / Research Internship in France — Feb/March 2027",
+    domains: "Data Engineering · Machine Learning · Generative AI · MLOps · Applied Research",
+    availability: "Available for a 6-month PFE from Feb/March 2027",
+  },
   sections: {
     about: { slug: "about_me", title: "About me" },
     skills: { slug: "skills", title: "Technical skills", subtitle: "The stack behind the work — from model training to data pipelines to production." },
@@ -48,7 +56,22 @@ const en: UIDict = {
     seeMore: "See more",
     seeLess: "See less",
     collaborators: "Collaborators",
+    engineeringTitle: "Engineering Projects",
+    engineeringSubtitle: "Production-oriented systems — end-to-end delivery, deployment and measurable impact.",
+    researchTitle: "Research & Experimental Work",
+    researchSubtitle: "Experimentation, methodology, evaluation and technical challenges — early-stage, exploratory research directions.",
     categories: { "Machine Learning": "Machine Learning", "NLP & LLM": "NLP & LLM", "AI & Automation": "AI & Automation", "R&D": "R&D", Research: "Research", "Data Engineering": "Data Engineering", "Full-Stack": "Full-Stack" },
+  },
+  researchInterests: {
+    title: "Research Interests",
+    subtitle: "Directions I want to explore further during a research-oriented PFE.",
+    items: [
+      "Retrieval-Augmented Generation & LLM Systems",
+      "Multilingual NLP & Document AI",
+      "Computer Vision & OCR",
+      "Continual / Personalized Learning",
+      "Data & ML Systems at Scale",
+    ],
   },
   embed: { live: "Live", open: "Open", liveDemo: "Live Demo", preview: "Preview", startDemo: "Start live demo", openNewTab: "Open live demo in a new tab" },
   timeline: { experience: "Experience", education: "Education", report: "Report" },
@@ -78,7 +101,14 @@ const en: UIDict = {
 const fr: UIDict = {
   nav: { about: "À propos", skills: "Compétences", projects: "Projets", experience: "Parcours", leadership: "Leadership", contact: "Contact", menu: "[ menu ]", close: "[ fermer ]" },
   langToggle: { label: "Langue", toEnglish: "Switch to English", toFrench: "Passer en français" },
-  hero: { welcome: "Bonjour — bienvenue sur mon portfolio", viewCv: "Voir le CV", contactMe: "Me contacter" },
+  hero: {
+    welcome: "Bonjour — bienvenue sur mon portfolio",
+    viewCv: "Voir le CV",
+    contactMe: "Me contacter",
+    seeking: "Recherche un PFE / stage de recherche de 6 mois en France — Fév/Mars 2027",
+    domains: "Data Engineering · Machine Learning · IA générative · MLOps · Recherche appliquée",
+    availability: "Disponible pour un PFE de 6 mois à partir de fév/mars 2027",
+  },
   sections: {
     about: { slug: "about_me", title: "À propos de moi" },
     skills: { slug: "skills", title: "Compétences techniques", subtitle: "La stack derrière le travail — de l'entraînement des modèles aux pipelines de données jusqu'à la production." },
@@ -98,7 +128,22 @@ const fr: UIDict = {
     seeMore: "Voir plus",
     seeLess: "Voir moins",
     collaborators: "Collaborateurs",
+    engineeringTitle: "Projets d'ingénierie",
+    engineeringSubtitle: "Des systèmes orientés production — livraison de bout en bout, déploiement et impact mesurable.",
+    researchTitle: "Recherche & Travaux Expérimentaux",
+    researchSubtitle: "Expérimentation, méthodologie, évaluation et défis techniques — pistes de recherche exploratoires, à un stade préliminaire.",
     categories: { "Machine Learning": "Machine Learning", "NLP & LLM": "NLP & LLM", "AI & Automation": "IA & Automatisation", "R&D": "R&D", Research: "Recherche", "Data Engineering": "Data Engineering", "Full-Stack": "Full-Stack" },
+  },
+  researchInterests: {
+    title: "Intérêts de recherche",
+    subtitle: "Des pistes que je souhaite approfondir durant un PFE à orientation recherche.",
+    items: [
+      "Génération augmentée par récupération (RAG) & systèmes LLM",
+      "NLP multilingue & IA documentaire",
+      "Vision par ordinateur & OCR",
+      "Apprentissage continu / personnalisé",
+      "Systèmes Data & ML à grande échelle",
+    ],
   },
   embed: { live: "En ligne", open: "Ouvrir", liveDemo: "Démo en ligne", preview: "Aperçu", startDemo: "Lancer la démo", openNewTab: "Ouvrir la démo dans un nouvel onglet" },
   timeline: { experience: "Expérience", education: "Formation", report: "Rapport" },

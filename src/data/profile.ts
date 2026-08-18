@@ -13,8 +13,8 @@ export const profile = {
     fr: "Élève-ingénieur en Data & IA, je fais le pont entre recherche appliquée et production en concevant des systèmes intelligents combinant Machine Learning prédictif, ingénierie des données et solutions LLM. Fort d'expériences en leadership et gestion de projet, j'associe rigueur technique, vision produit et sens du concret pour transformer des problématiques réelles en solutions Data & IA fiables, déployables et à impact métier.",
   } as Loc,
   location: {
-    en: "Agadir, Morocco (Open to Relocation)",
-    fr: "Agadir, Maroc (Mobile)"
+    en: "Morocco · Open to relocation",
+    fr: "Maroc · Ouvert à la mobilité"
   } as Loc,
   email: "abderrahmankayouh67@gmail.com",
   status: {
@@ -62,7 +62,7 @@ export const profile = {
   // Compact hero highlights (real, traceable).
   heroStats: [
     { value: "2+", label: { en: "Internships", fr: "Stages" } as Loc },
-    { value: "1", label: { en: "Research Draft", fr: "Projet de recherche" } as Loc },
+    { value: "1", label: { en: "Research Proposal", fr: " Pistes de recherche" } as Loc },
     { value: "7", label: { en: "Team Led", fr: "Équipe dirigée" } as Loc },
   ],
   // Headline stats — every number here is real and traceable.

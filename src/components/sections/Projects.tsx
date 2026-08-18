@@ -1,11 +1,12 @@
 "use client";
 
-import { useMemo, useState, type CSSProperties } from "react";
+import { useState, type CSSProperties } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Github, ExternalLink, FileText, ArrowUpRight, Users, ChevronDown } from "lucide-react";
-import { projectCategories, type Project } from "@/data/projects";
+import { Github, ExternalLink, FileText, ArrowUpRight, Users, ChevronDown, Cpu, FlaskConical, type LucideIcon } from "lucide-react";
+import { type Project } from "@/data/projects";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProjectMedia } from "@/components/ui/ProjectMedia";
+import { Reveal } from "@/components/ui/Reveal";
 import { categoryColor } from "@/lib/categories";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
@@ -170,18 +171,61 @@ function ProjectCard({ project }: { project: Project }) {
   );
 }
 
+/** One labelled group (Engineering or Research) with its heading + card grid. */
+function ProjectGroup({
+  label,
+  subtitle,
+  accent,
+  icon: Icon,
+  items,
+}: {
+  label: string;
+  subtitle: string;
+  accent: string;
+  icon: LucideIcon;
+  items: Project[];
+}) {
+  if (!items.length) return null;
+  return (
+    <div className="mt-14 first:mt-10">
+      <Reveal className="mb-6">
+        <div className="flex items-center gap-3">
+          <span
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-full border"
+            style={{
+              borderColor: `color-mix(in srgb, ${accent} 45%, transparent)`,
+              color: accent,
+              background: `color-mix(in srgb, ${accent} 12%, transparent)`,
+            }}
+          >
+            <Icon size={17} />
+          </span>
+          <h3
+            className="font-display text-step-1 font-semibold tracking-tight"
+            style={{ color: accent }}
+          >
+            {label}
+          </h3>
+          <span className="h-px flex-1 bg-line" />
+        </div>
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">{subtitle}</p>
+      </Reveal>
+
+      <div className="grid gap-5 md:grid-cols-2">
+        {items.map((p, i) => (
+          <Reveal key={p.file} delay={(i % 2) * 0.05}>
+            <ProjectCard project={p} />
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function Projects({ projects }: { projects: Project[] }) {
   const { ui } = useI18n();
-  const [active, setActive] = useState<string>("All");
-
-  const filtered = useMemo(
-    () =>
-      active === "All" ? projects : projects.filter((p) => p.category === active),
-    [active, projects]
-  );
-
-  const categoryLabel = (c: string) =>
-    c === "All" ? ui.projects.all : ui.projects.categories[c] ?? c;
+  const engineering = projects.filter((p) => p.group !== "research");
+  const research = projects.filter((p) => p.group === "research");
 
   return (
     <section id="projects" className="container-x scroll-mt-24 py-24">
@@ -192,40 +236,21 @@ export function Projects({ projects }: { projects: Project[] }) {
         subtitle={ui.sections.projects.subtitle}
       />
 
-      <div className="mb-8 flex flex-wrap gap-2">
-        {projectCategories.map((c) => (
-          <button
-            key={c}
-            type="button"
-            onClick={() => setActive(c)}
-            className={cn(
-              "rounded-full border px-4 py-1.5 font-mono text-xs transition-colors",
-              active === c
-                ? "border-primary bg-primary/10 text-primary"
-                : "border-line-strong text-muted hover:border-primary hover:text-text"
-            )}
-          >
-            {categoryLabel(c)}
-          </button>
-        ))}
-      </div>
+      <ProjectGroup
+        label={ui.projects.engineeringTitle}
+        subtitle={ui.projects.engineeringSubtitle}
+        accent="var(--primary)"
+        icon={Cpu}
+        items={engineering}
+      />
 
-      <motion.div layout className="grid gap-5 md:grid-cols-2">
-        <AnimatePresence mode="popLayout">
-          {filtered.map((p) => (
-            <motion.div
-              key={p.file}
-              layout
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.3 }}
-            >
-              <ProjectCard project={p} />
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </motion.div>
+      <ProjectGroup
+        label={ui.projects.researchTitle}
+        subtitle={ui.projects.researchSubtitle}
+        accent="#34d399"
+        icon={FlaskConical}
+        items={research}
+      />
     </section>
   );
 }

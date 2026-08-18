@@ -3,6 +3,7 @@ import { Footer } from "@/components/ui/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Skills } from "@/components/sections/Skills";
+import { ResearchInterests } from "@/components/sections/ResearchInterests";
 import { Projects } from "@/components/sections/Projects";
 import { Timeline } from "@/components/sections/Timeline";
 import { Certifications } from "@/components/sections/Certifications";
@@ -66,6 +67,7 @@ export default function Home() {
         <Hero />
         <About />
         <Skills />
+        <ResearchInterests />
         <Projects projects={projectsWithMedia} />
         <Timeline entries={timelineWithMedia} />
         <Certifications certs={certsWithMedia} />

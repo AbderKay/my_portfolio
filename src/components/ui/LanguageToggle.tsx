@@ -1,39 +1,43 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
+
+const LANGS = ["en", "fr"] as const;
 
 /**
- * FR/EN language switch. Sits directly above the theme toggle in the nav and
- * mirrors its look — a bordered pill whose label cross-fades when toggled.
- * Shows the language you'd switch TO, so the action reads clearly.
+ * Segmented EN | FR language switch in the nav. Both options are visible; the
+ * active one is highlighted. Switching is instant (no page reload) via the
+ * i18n context, and works identically on desktop and mobile.
  */
 export function LanguageToggle() {
-  const { lang, toggle, ui } = useI18n();
-  const reduce = useReducedMotion();
-  const next = lang === "en" ? "FR" : "EN";
-  const label = lang === "en" ? ui.langToggle.toFrench : ui.langToggle.toEnglish;
+  const { lang, setLang, ui } = useI18n();
 
   return (
-    <button
-      type="button"
-      onClick={toggle}
-      aria-label={label}
-      title={label}
-      className="relative grid h-9 w-9 place-items-center overflow-hidden rounded-full border border-line-strong font-mono text-[0.7rem] font-semibold uppercase tracking-wider text-muted transition-colors hover:border-primary hover:text-primary"
+    <div
+      role="group"
+      aria-label={ui.langToggle.label}
+      className="inline-flex h-9 items-center rounded-full border border-line-strong p-0.5 font-mono text-[0.7rem] font-semibold uppercase tracking-wider"
     >
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.span
-          key={next}
-          initial={reduce ? undefined : { y: -12, opacity: 0 }}
-          animate={reduce ? undefined : { y: 0, opacity: 1 }}
-          exit={reduce ? undefined : { y: 12, opacity: 0 }}
-          transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute"
-        >
-          {next}
-        </motion.span>
-      </AnimatePresence>
-    </button>
+      {LANGS.map((l, i) => (
+        <div key={l} className="flex items-center">
+          {i > 0 ? <span className="px-0.5 text-faint" aria-hidden>|</span> : null}
+          <button
+            type="button"
+            onClick={() => setLang(l)}
+            aria-pressed={lang === l}
+            aria-label={l === "en" ? ui.langToggle.toEnglish : ui.langToggle.toFrench}
+            className={cn(
+              "rounded-full px-2 py-1 transition-colors",
+              lang === l
+                ? "bg-primary/15 text-primary"
+                : "text-muted hover:text-text"
+            )}
+          >
+            {l}
+          </button>
+        </div>
+      ))}
+    </div>
   );
 }
