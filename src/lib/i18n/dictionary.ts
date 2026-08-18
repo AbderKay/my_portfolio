@@ -33,9 +33,9 @@ const en: UIDict = {
     welcome: "Hi, I'm — welcome to my portfolio",
     viewCv: "View CV",
     contactMe: "Contact Me",
-    seeking: "Seeking a 6-month PFE / Research Internship — Feb/March 2027",
+    seeking: "Seeking a 6-month final-year internship — Feb/March 2027",
     domains: "Data Engineering · Machine Learning · Generative AI · MLOps · Applied Research",
-    availability: "Available for a 6-month PFE from Feb/March 2027",
+    availability: "Seeking a 6-month final-year internship starting Feb./March 2027",
   },
   sections: {
     about: { slug: "about_me", title: "About me" },
@@ -105,9 +105,9 @@ const fr: UIDict = {
     welcome: "Bonjour — bienvenue sur mon portfolio",
     viewCv: "Voir le CV",
     contactMe: "Me contacter",
-    seeking: "Recherche un PFE / stage de recherche de 6 mois — Fév/Mars 2027",
+    seeking: "À la recherche d'un PFE de 6 mois — Fév./Mars 2027",
     domains: "Data Engineering · Machine Learning · IA générative · MLOps · Recherche appliquée",
-    availability: "Disponible pour un PFE de 6 mois à partir de fév/mars 2027",
+    availability: "À la recherche d'un PFE de 6 mois à partir de fév./mars 2027",
   },
   sections: {
     about: { slug: "about_me", title: "À propos de moi" },

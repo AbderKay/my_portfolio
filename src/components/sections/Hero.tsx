@@ -80,8 +80,8 @@ export function Hero() {
       <div className="container-x relative z-10 grid w-full items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
         {/* LEFT — identity */}
         <div>
-          {/* PFE / research-internship status + technical domains */}
-          <div className="hero-rise mb-5 space-y-3">
+          {/* PFE status pill */}
+          <div className="hero-rise mb-5">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3.5 py-1.5 font-mono text-[0.72rem] font-medium leading-tight text-primary">
               <span className="relative flex h-2 w-2 shrink-0" aria-hidden>
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-70" />
@@ -89,9 +89,6 @@ export function Hero() {
               </span>
               {ui.hero.seeking}
             </span>
-            <p className="max-w-xl font-mono text-[0.72rem] leading-relaxed text-muted">
-              {ui.hero.domains}
-            </p>
           </div>
 
           <h1 className="hero-rise font-display text-[clamp(2.5rem,7vw,5rem)] font-bold leading-[0.95] tracking-tight">

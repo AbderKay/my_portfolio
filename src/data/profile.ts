@@ -9,8 +9,8 @@ export const profile = {
     fr: "Élève-Ingénieur — IA / ML & Data",
   } as Loc,
   tagline: {
-    en: "As a Data & AI engineering student, I bridge applied research and production by designing intelligent systems that combine predictive Machine Learning, data engineering, and LLM solutions. Backed by experience in leadership and project management, I pair technical rigor, product vision, and a hands-on mindset to turn real-world problems into reliable, deployable Data & AI solutions with measurable business impact.",
-    fr: "Élève-ingénieur en Data & IA, je fais le pont entre recherche appliquée et production en concevant des systèmes intelligents combinant Machine Learning prédictif, ingénierie des données et solutions LLM. Fort d'expériences en leadership et gestion de projet, j'associe rigueur technique, vision produit et sens du concret pour transformer des problématiques réelles en solutions Data & IA fiables, déployables et à impact métier.",
+    en: "Engineering student in Data & AI, I bridge applied research and production by designing intelligent systems combining predictive Machine Learning, data engineering, and LLM-based solutions.",
+    fr: "Élève-ingénieur en Data & IA, je fais le pont entre recherche appliquée et production en concevant des systèmes intelligents combinant Machine Learning prédictif, ingénierie des données et solutions LLM.",
   } as Loc,
   location: {
     en: "Morocco · Open to relocation",
@@ -18,7 +18,7 @@ export const profile = {
   } as Loc,
   email: "abderrahmankayouh67@gmail.com",
   status: {
-    en: "Open to ML / AI / Data Engineering & research PFE internships",
+    en: "Open to final-year internships in ML / AI / Data Engineering & research",
     fr: "Ouvert aux stages PFE en ML / IA / Data Engineering & recherche",
   } as Loc,
   terminalUser: "abder",
@@ -37,16 +37,16 @@ export const profile = {
   calendar: "",
   about: {
     en: [
-      "Engineering student at ENSA Agadir specializing in Big Data, Data Science & Artificial Intelligence, seeking a 6-month Final-Year Internship (PFE) starting February/March 2027.",
-      "I build Data & AI solutions spanning Data Engineering, Machine Learning, LLMs, and Computer Vision, with a strong focus on deployment and business impact.",
-      "Through hands-on projects, I have built strong technical execution skills, while leading a 7-person team as Junior Enterprise President strengthened my leadership, autonomy, and communication.",
-      "My goal: transform real-world problems into concrete, reliable, and deployable Data & AI solutions.",
+      "My path has been shaped by a single ambition: to understand data, design intelligent systems, and turn them into concrete solutions.",
+      "Across my projects and experiences, I have tackled a wide range of problems — from data engineering and Machine Learning to computer vision, LLMs, and automation. These experiences taught me to look beyond the model or the algorithm: to understand the need, build a robust solution, measure its performance, and think through its deployment.",
+      "In parallel, my experience in a Junior Enterprise — notably leading a team of 7 — helped me grow my leadership, autonomy, and ability to collaborate on concrete projects.",
+      "Today, I want to put this blend of technical and human skills at the service of ambitious projects, where I can keep learning, building, and creating value.",
     ],
     fr: [
-      "Élève-ingénieur à l'ENSA Agadir, spécialisé en Big Data, Data Science & Intelligence Artificielle, je recherche un stage de fin d'études (PFE) de 6 mois à partir de février/mars 2027.",
-      "Je construis des solutions Data & IA allant de l'ingénierie des données et du Machine Learning aux LLMs et à la Vision par ordinateur, avec une approche orientée déploiement et impact métier.",
-      "Mes projets m'ont permis de développer une forte capacité d'exécution technique, tandis que mon expérience à la tête d'une équipe de 7 personnes en Junior Entreprise a renforcé mon leadership, mon autonomie et ma communication.",
-      "Mon objectif : transformer des problématiques réelles en solutions Data & IA concrètes, fiables et déployables.",
+      "Mon parcours s'est construit autour d'une même ambition : comprendre les données, concevoir des systèmes intelligents et les transformer en solutions concrètes.",
+      "À travers mes projets et expériences, j'ai travaillé sur des problématiques variées allant de l'ingénierie des données et du Machine Learning à la vision par ordinateur, aux LLMs et à l'automatisation. Ces expériences m'ont appris à aller au-delà du modèle ou de l'algorithme : comprendre le besoin, construire une solution robuste, mesurer ses performances et réfléchir à son déploiement.",
+      "En parallèle, mon expérience en Junior Entreprise, notamment à la tête d'une équipe de 7 personnes, m'a permis de développer mon leadership, mon autonomie et ma capacité à collaborer autour de projets concrets.",
+      "Aujourd'hui, je cherche à mettre cette combinaison de compétences techniques et humaines au service de projets ambitieux, où je peux continuer à apprendre, construire et créer de la valeur.",
     ],
   } as Loc<string[]>,
   languages: [
@@ -56,8 +56,8 @@ export const profile = {
   ],
   // Rotating roles for the hero typewriter (all honest to current/target work).
   heroRoles: {
-    en: ["AI Development", "Machine Learning Engineering", "Data Engineering", "MLOps"],
-    fr: ["Développement IA", "Ingénierie Machine Learning", "Ingénierie des Données", "MLOps"],
+    en: ["Data & AI Engineering"],
+    fr: ["Data & AI Engineering"],
   } as Loc<string[]>,
   // Compact hero highlights (real, traceable).
   heroStats: [
