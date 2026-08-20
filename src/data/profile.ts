@@ -32,7 +32,7 @@ export const profile = {
   cvPath: "/CV_Abderrahman_Kayouh_PFE_2027.pdf",
   // Portrait lives at /public/portrait.jpg. If the file is missing, the hero
   // gracefully falls back to a styled placeholder (see HeroPortrait).
-  photo: "/me.png",
+  photo: "/me.jpg",
   // Optional scheduling link (Cal.com / Calendly). Empty hides the "Book a call".
   calendar: "",
   about: {

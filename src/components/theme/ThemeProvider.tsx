@@ -61,4 +61,7 @@ export function useTheme() {
 }
 
 /** Inline script injected pre-paint to set the theme before first paint. */
-export const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t='dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();`;
+// The site always opens in dark mode on load (forced, regardless of any saved
+// preference); visitors can still switch to light during their visit via the
+// toggle. On the next launch it opens in dark again.
+export const themeScript = `(function(){try{document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();`;
