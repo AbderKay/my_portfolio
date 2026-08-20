@@ -3,25 +3,27 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 
-type Star = {
-  x: number;
-  y: number;
-  depth: number; // 0 (far) .. 1 (near) — drives parallax + size
-  r: number;
-  base: number; // base alpha
-  tw: number; // twinkle speed
-  warm: boolean;
+type Node3 = { x: number; y: number; z: number; r: number };
+type Pulse = { e: number; t: number; speed: number };
+
+type Palette = {
+  node: (a: number) => string;
+  edge: (a: number) => string;
+  pulse: (a: number) => string;
+  nodeA: number;
+  edgeA: number;
+  canvasOpacity: number;
 };
-type Dust = { x: number; y: number; vx: number; vy: number; r: number };
-type Shooter = { x: number; y: number; vx: number; vy: number; life: number; len: number };
 
 /**
- * Deep-space environment: soft CSS nebulae / aurora / planet drifting via GSAP,
- * plus a canvas field of parallax twinkling stars, cosmic dust that parts around
- * the cursor, and occasional shooting stars. Cursor gently shifts the star
- * layers (depth parallax) and a light follows the pointer.
- * Fixed, behind content, pointer-events:none. Capped counts + DPR for 60fps;
- * a calm static frame under reduced motion.
+ * Ambient environment: soft CSS nebulae / aurora drifting via GSAP, plus a
+ * canvas rendering a rotating 3D graph — nodes connected to their nearest
+ * neighbours with data "pulses" travelling along the links (a neural-network /
+ * distributed-system motif). Perspective projection, gentle auto-rotation,
+ * cursor parallax and subtle scroll drift. Theme-aware (re-colours live on
+ * light/dark switch), reduced on mobile / low-power, static under reduced
+ * motion, and paused when the tab is hidden. Fixed, behind content,
+ * pointer-events:none.
  */
 export function SpaceBackground() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -33,191 +35,224 @@ export function SpaceBackground() {
     const rootEl = rootRef.current;
     if (!canvas || !rootEl) return;
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    if (!ctx) return; // graceful fallback: nebulae only
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    const styles = getComputedStyle(document.documentElement);
-    const primary = styles.getPropertyValue("--primary").trim() || "#57b6c9";
-    const accent = styles.getPropertyValue("--accent").trim() || "#e8a24c";
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    const lowPower = (navigator.hardwareConcurrency || 8) <= 4;
+    const light = () =>
+      document.documentElement.getAttribute("data-theme") === "light";
+
+    const readPalette = (): Palette =>
+      light()
+        ? {
+            // deep teal / slate on the light "paper" — structure + depth,
+            // kept subtle so dark text stays perfectly readable.
+            node: (a) => `rgba(24,96,116,${a})`,
+            edge: (a) => `rgba(42,96,122,${a})`,
+            pulse: (a) => `rgba(199,122,34,${a})`,
+            nodeA: 0.5,
+            edgeA: 0.22,
+            canvasOpacity: 0.9,
+          }
+        : {
+            node: (a) => `rgba(126,205,224,${a})`,
+            edge: (a) => `rgba(110,170,205,${a})`,
+            pulse: (a) => `rgba(232,162,76,${a})`,
+            nodeA: 0.6,
+            edgeA: 0.16,
+            canvasOpacity: 0.95,
+          };
+
+    let palette = readPalette();
 
     let w = 0;
     let h = 0;
+    let cx = 0;
+    let cy = 0;
+    let spread = 0;
     let raf = 0;
-    let stars: Star[] = [];
-    let dust: Dust[] = [];
-    let shooters: Shooter[] = [];
+    let nodes: Node3[] = [];
+    let edges: [number, number][] = [];
+    let pulses: Pulse[] = [];
+    let ay = 0.5; // start on a pleasant 3/4 view
+    let scrollY = 0;
     const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
+
+    // projection buffers (filled each frame)
+    let px = new Float32Array(0);
+    let py = new Float32Array(0);
+    let pa = new Float32Array(0); // depth alpha 0(far)..1(near)
+    let ps = new Float32Array(0); // perspective scale
+
+    const counts = () => {
+      const small = isMobile || lowPower;
+      return { N: small ? 30 : 74, K: small ? 2 : 3, P: small ? 2 : 6 };
+    };
 
     const build = () => {
       w = window.innerWidth;
       h = window.innerHeight;
+      cx = w / 2;
+      cy = h / 2;
+      spread = Math.max(w, h) * 0.4;
       canvas.width = Math.floor(w * dpr);
       canvas.height = Math.floor(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const starCount = Math.min(240, Math.floor((w * h) / 6800));
-      stars = Array.from({ length: starCount }, () => {
-        const depth = Math.random();
-        return {
-          x: Math.random() * w,
-          y: Math.random() * h,
-          depth,
-          r: 0.4 + depth * 1.4,
-          base: 0.25 + Math.random() * 0.6,
-          tw: 0.6 + Math.random() * 2.2,
-          warm: Math.random() > 0.85,
-        };
+      const { N, K, P } = counts();
+      nodes = Array.from({ length: N }, () => {
+        let x = 0;
+        let y = 0;
+        let z = 0;
+        let d = 2;
+        while (d > 1) {
+          x = Math.random() * 2 - 1;
+          y = Math.random() * 2 - 1;
+          z = Math.random() * 2 - 1;
+          d = x * x + y * y + z * z;
+        }
+        return { x, y: y * 0.82, z, r: 1.1 + Math.random() * 1.7 };
       });
 
-      const dustCount = Math.min(46, Math.floor((w * h) / 42000));
-      dust = Array.from({ length: dustCount }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.12,
-        vy: (Math.random() - 0.5) * 0.12,
-        r: Math.random() * 1.2 + 0.4,
-      }));
+      // connect each node to its K nearest neighbours (deduped)
+      edges = [];
+      const seen = new Set<string>();
+      for (let i = 0; i < N; i++) {
+        const ds: { j: number; d: number }[] = [];
+        for (let j = 0; j < N; j++) {
+          if (i === j) continue;
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dz = nodes[i].z - nodes[j].z;
+          ds.push({ j, d: dx * dx + dy * dy + dz * dz });
+        }
+        ds.sort((a, b) => a.d - b.d);
+        for (let k = 0; k < K && k < ds.length; k++) {
+          const j = ds[k].j;
+          const key = i < j ? `${i}-${j}` : `${j}-${i}`;
+          if (!seen.has(key)) {
+            seen.add(key);
+            edges.push([i, j]);
+          }
+        }
+      }
+
+      pulses = edges.length
+        ? Array.from({ length: P }, () => ({
+            e: Math.floor(Math.random() * edges.length),
+            t: Math.random(),
+            speed: 0.006 + Math.random() * 0.01,
+          }))
+        : [];
+
+      px = new Float32Array(N);
+      py = new Float32Array(N);
+      pa = new Float32Array(N);
+      ps = new Float32Array(N);
     };
     build();
 
-    const spawnShooter = () => {
-      if (reduce || document.hidden) return;
-      const fromLeft = Math.random() > 0.5;
-      const speed = 8 + Math.random() * 6;
-      shooters.push({
-        x: fromLeft ? -40 : w + 40,
-        y: Math.random() * h * 0.5,
-        vx: (fromLeft ? 1 : -1) * speed,
-        vy: speed * (0.35 + Math.random() * 0.3),
-        life: 1,
-        len: 90 + Math.random() * 80,
-      });
-    };
-    // occasional shooting stars
-    const shooterTimer = window.setInterval(
-      spawnShooter,
-      4200 + Math.random() * 3000
-    );
+    const FOV = 3.2;
 
-    const draw = (t: number) => {
+    const draw = () => {
       ctx.clearRect(0, 0, w, h);
-      // ease pointer influence
-      mouse.x += (mouse.tx - mouse.x) * 0.06;
-      mouse.y += (mouse.ty - mouse.y) * 0.06;
+      mouse.x += (mouse.tx - mouse.x) * 0.05;
+      mouse.y += (mouse.ty - mouse.y) * 0.05;
 
-      // stars (parallax by depth + twinkle)
-      for (const s of stars) {
-        const px = s.x + mouse.x * s.depth * 28;
-        const py = s.y + mouse.y * s.depth * 28;
-        const a = reduce
-          ? s.base
-          : s.base + Math.sin(t * 0.001 * s.tw + s.x) * 0.28;
-        ctx.globalAlpha = Math.max(0.05, Math.min(1, a));
-        ctx.fillStyle = s.warm ? accent : primary;
-        ctx.beginPath();
-        ctx.arc(px, py, s.r, 0, Math.PI * 2);
-        ctx.fill();
+      if (!reduce) ay += 0.0011;
+      const rotY = ay + mouse.x * 0.5 + scrollY * 0.00014;
+      const rotX = 0.2 + mouse.y * 0.32;
+      const cosY = Math.cos(rotY);
+      const sinY = Math.sin(rotY);
+      const cosX = Math.cos(rotX);
+      const sinX = Math.sin(rotX);
+
+      // rotate + project
+      for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
+        const x1 = n.x * cosY - n.z * sinY;
+        let z1 = n.x * sinY + n.z * cosY;
+        const y1 = n.y * cosX - z1 * sinX;
+        z1 = n.y * sinX + z1 * cosX;
+        const sc = FOV / (FOV - z1);
+        px[i] = cx + x1 * spread * sc;
+        py[i] = cy + y1 * spread * sc;
+        ps[i] = sc;
+        pa[i] = Math.max(0, Math.min(1, (z1 + 1) / 2));
       }
 
-      // cosmic dust (drift + repel from pointer)
-      const mpx = w / 2 + mouse.tx * (w / 2);
-      const mpy = h / 2 + mouse.ty * (h / 2);
-      for (const d of dust) {
-        if (!reduce) {
-          d.x += d.vx;
-          d.y += d.vy;
-          if (d.x < 0) d.x = w;
-          if (d.x > w) d.x = 0;
-          if (d.y < 0) d.y = h;
-          if (d.y > h) d.y = 0;
-          const dx = d.x - mpx;
-          const dy = d.y - mpy;
-          const dist2 = dx * dx + dy * dy;
-          if (dist2 < 14000) {
-            const f = (14000 - dist2) / 14000;
-            d.x += (dx / Math.sqrt(dist2 || 1)) * f * 1.1;
-            d.y += (dy / Math.sqrt(dist2 || 1)) * f * 1.1;
-          }
-        }
-        ctx.globalAlpha = 0.35;
-        ctx.fillStyle = primary;
+      // edges
+      ctx.lineWidth = 1;
+      for (let k = 0; k < edges.length; k++) {
+        const i = edges[k][0];
+        const j = edges[k][1];
+        const a = Math.min(pa[i], pa[j]);
+        ctx.strokeStyle = palette.edge(palette.edgeA * (0.3 + a * 0.7));
         ctx.beginPath();
-        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      // shooting stars
-      shooters = shooters.filter((sh) => sh.life > 0 && sh.x > -120 && sh.x < w + 120);
-      for (const sh of shooters) {
-        sh.x += sh.vx;
-        sh.y += sh.vy;
-        sh.life -= 0.012;
-        const grad = ctx.createLinearGradient(
-          sh.x,
-          sh.y,
-          sh.x - sh.vx * (sh.len / 10),
-          sh.y - sh.vy * (sh.len / 10)
-        );
-        grad.addColorStop(0, primary);
-        grad.addColorStop(1, "transparent");
-        ctx.globalAlpha = Math.max(0, sh.life) * 0.9;
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.6;
-        ctx.beginPath();
-        ctx.moveTo(sh.x, sh.y);
-        ctx.lineTo(sh.x - sh.vx * (sh.len / 10), sh.y - sh.vy * (sh.len / 10));
+        ctx.moveTo(px[i], py[i]);
+        ctx.lineTo(px[j], py[j]);
         ctx.stroke();
       }
 
-      ctx.globalAlpha = 1;
+      // nodes (+ soft halo on the near ones)
+      for (let i = 0; i < nodes.length; i++) {
+        const a = pa[i];
+        const rad = nodes[i].r * ps[i] * (0.55 + a * 0.6);
+        if (a > 0.62) {
+          ctx.fillStyle = palette.node(0.05 * a);
+          ctx.beginPath();
+          ctx.arc(px[i], py[i], rad * 3.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.fillStyle = palette.node(palette.nodeA * (0.28 + a * 0.72));
+        ctx.beginPath();
+        ctx.arc(px[i], py[i], rad, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // data pulses travelling along links
+      if (!reduce && edges.length) {
+        for (const p of pulses) {
+          p.t += p.speed;
+          if (p.t >= 1) {
+            p.t = 0;
+            p.e = Math.floor(Math.random() * edges.length);
+            p.speed = 0.006 + Math.random() * 0.01;
+          }
+          const i = edges[p.e][0];
+          const j = edges[p.e][1];
+          const x = px[i] + (px[j] - px[i]) * p.t;
+          const y = py[i] + (py[j] - py[i]) * p.t;
+          const a = (pa[i] + pa[j]) / 2;
+          ctx.fillStyle = palette.pulse(0.16 * a);
+          ctx.beginPath();
+          ctx.arc(x, y, 5 * (0.6 + a), 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = palette.pulse(0.85 * a);
+          ctx.beginPath();
+          ctx.arc(x, y, 1.7 * (0.6 + a), 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
     };
 
-    const frame = (t: number) => {
-      draw(t);
+    const frame = () => {
+      draw();
       raf = requestAnimationFrame(frame);
     };
-    if (reduce) draw(0);
-    else raf = requestAnimationFrame(frame);
+    canvas.style.opacity = String(palette.canvasOpacity);
+    draw(); // paint an initial frame immediately
+    if (!reduce) raf = requestAnimationFrame(frame);
 
-    // ---- GSAP: nebula / aurora / planet continuous drift + cursor light ----
+    // ---- GSAP: nebula / aurora continuous drift + cursor light ----
     const gctx = gsap.context(() => {
       if (reduce) return;
-      gsap.to(".sb-neb1", {
-        xPercent: 8,
-        yPercent: 6,
-        scale: 1.12,
-        duration: 18,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-      });
-      gsap.to(".sb-neb2", {
-        xPercent: -7,
-        yPercent: -5,
-        scale: 1.1,
-        duration: 22,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-      });
-      gsap.to(".sb-neb3", {
-        xPercent: 5,
-        yPercent: -8,
-        opacity: 0.55,
-        duration: 26,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-      });
-      gsap.to(".sb-aurora", {
-        xPercent: 12,
-        opacity: 0.55,
-        duration: 20,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-      });
+      gsap.to(".sb-neb1", { xPercent: 8, yPercent: 6, scale: 1.12, duration: 18, ease: "sine.inOut", repeat: -1, yoyo: true });
+      gsap.to(".sb-neb2", { xPercent: -7, yPercent: -5, scale: 1.1, duration: 22, ease: "sine.inOut", repeat: -1, yoyo: true });
+      gsap.to(".sb-neb3", { xPercent: 5, yPercent: -8, opacity: 0.55, duration: 26, ease: "sine.inOut", repeat: -1, yoyo: true });
+      gsap.to(".sb-aurora", { xPercent: 12, opacity: 0.55, duration: 20, ease: "sine.inOut", repeat: -1, yoyo: true });
     }, rootEl);
 
     let lx: gsap.QuickToFunc | null = null;
@@ -233,6 +268,9 @@ export function SpaceBackground() {
       lx?.(e.clientX - window.innerWidth / 2);
       ly?.(e.clientY - window.innerHeight / 2);
     };
+    const onScroll = () => {
+      scrollY = window.scrollY || window.pageYOffset || 0;
+    };
     let resizeT = 0;
     const onResize = () => {
       window.clearTimeout(resizeT);
@@ -242,18 +280,30 @@ export function SpaceBackground() {
       if (document.hidden) cancelAnimationFrame(raf);
       else if (!reduce) raf = requestAnimationFrame(frame);
     };
+    // live re-colour when the theme toggles
+    const themeObs = new MutationObserver(() => {
+      palette = readPalette();
+      canvas.style.opacity = String(palette.canvasOpacity);
+      draw(); // repaint immediately with the new palette
+    });
+    themeObs.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
 
     window.addEventListener("mousemove", onMove, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
     document.addEventListener("visibilitychange", onVisibility);
 
     return () => {
       cancelAnimationFrame(raf);
-      window.clearInterval(shooterTimer);
       window.clearTimeout(resizeT);
       window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
       document.removeEventListener("visibilitychange", onVisibility);
+      themeObs.disconnect();
       gctx.revert();
     };
   }, []);
@@ -267,44 +317,29 @@ export function SpaceBackground() {
       {/* nebula clouds */}
       <div
         className="sb-neb1 absolute -right-[10%] -top-[15%] h-[70vmax] w-[70vmax] rounded-full opacity-50 blur-[90px]"
-        style={{
-          background:
-            "radial-gradient(closest-side, var(--glow-primary), transparent 70%)",
-        }}
+        style={{ background: "radial-gradient(closest-side, var(--glow-primary), transparent 70%)" }}
       />
       <div
         className="sb-neb2 absolute -bottom-[20%] -left-[12%] h-[65vmax] w-[65vmax] rounded-full opacity-45 blur-[90px]"
-        style={{
-          background:
-            "radial-gradient(closest-side, var(--glow-accent), transparent 70%)",
-        }}
+        style={{ background: "radial-gradient(closest-side, var(--glow-accent), transparent 70%)" }}
       />
       <div
         className="sb-neb3 absolute left-1/2 top-1/3 h-[55vmax] w-[55vmax] -translate-x-1/2 rounded-full opacity-35 blur-[100px]"
-        style={{
-          background:
-            "radial-gradient(closest-side, rgba(90,120,200,0.30), transparent 70%)",
-        }}
+        style={{ background: "radial-gradient(closest-side, rgba(90,120,200,0.30), transparent 70%)" }}
       />
       {/* aurora band */}
       <div
         className="sb-aurora absolute -top-[10%] left-[-10%] h-[40vh] w-[120%] opacity-40 blur-[70px]"
-        style={{
-          background:
-            "linear-gradient(100deg, transparent, var(--glow-primary), transparent 60%)",
-        }}
+        style={{ background: "linear-gradient(100deg, transparent, var(--glow-primary), transparent 60%)" }}
       />
       {/* cursor-following light */}
       <div
         ref={lightRef}
         className="absolute left-1/2 top-1/2 h-[42vmax] w-[42vmax] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 blur-[80px]"
-        style={{
-          background:
-            "radial-gradient(closest-side, var(--glow-primary), transparent 70%)",
-        }}
+        style={{ background: "radial-gradient(closest-side, var(--glow-primary), transparent 70%)" }}
       />
-      {/* star / dust / shooting-star field */}
-      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full opacity-80" />
+      {/* 3D neural-network / data-graph field */}
+      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
     </div>
   );
 }

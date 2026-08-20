@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type MouseEvent } from "react";
-import { ArrowUpRight, FileText, Github, Linkedin, Mail, MapPin, CalendarClock } from "lucide-react";
+import { ArrowUpRight, FileText, Github, Linkedin, Mail, MapPin } from "lucide-react";
 import { profile } from "@/data/profile";
 import { gsap } from "@/lib/gsap";
 import { Typewriter } from "@/components/ui/Typewriter";
@@ -107,14 +107,10 @@ export function Hero() {
             {t(profile.tagline)}
           </p>
 
-          {/* availability / location */}
+          {/* location */}
           <div className="hero-rise mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-muted">
             <span className="inline-flex items-center gap-1.5">
               <MapPin size={13} className="text-primary" /> {t(profile.location)}
-            </span>
-            <span className="text-faint">·</span>
-            <span className="inline-flex items-center gap-1.5">
-              <CalendarClock size={13} className="text-primary" /> {ui.hero.availability}
             </span>
           </div>
 
