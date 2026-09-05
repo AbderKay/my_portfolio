@@ -27,7 +27,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const siteUrl = "https://abderrahman-kayouh.vercel.app";
+const siteUrl = "https://abderkay.me";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

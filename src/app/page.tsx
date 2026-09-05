@@ -25,7 +25,7 @@ const jsonLd = {
   jobTitle: profile.role.en,
   email: profile.email,
   address: { "@type": "PostalAddress", addressLocality: profile.location.en },
-  url: "https://abderrahman-kayouh.vercel.app",
+  url: "https://abderkay.me",
   sameAs: [profile.socials.github, profile.socials.linkedin],
 };
 
