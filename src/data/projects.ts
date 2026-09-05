@@ -36,7 +36,7 @@ export type Project = {
 
 const GITHUB: Loc = { en: "GitHub", fr: "GitHub" };
 const REPORT: Loc = { en: "Report", fr: "Rapport" };
-const FILES: Loc = { en: "Files", fr: "Fichiers" };
+const PAPER: Loc = { en: "Paper", fr: "Article" };
 
 const NASA_MEDIA = [
   "/nasa_space_apps_challenge/01.png",
@@ -270,45 +270,49 @@ const projectList: Project[] = [
     file: "prescription_ocr.py",
     slug: "prescription-ocr",
     title: {
-      en: "Research Draft",
-      fr: "Research Draft",
+      en: "Research Project",
+      fr: "Research Project",
     },
     category: "R&D",
     year: { en: "In progress", fr: "En cours" },
     context: {
-      en: "Independent research project",
-      fr: "Projet de recherche indépendant",
+      en: "Independent research project · Document AI",
+      fr: "Projet de recherche indépendant · Document AI",
     },
     summary: {
-      en: "A research effort to extract structured medical information from handwritten Moroccan prescriptions, multilingual (FR/AR), evolving toward continual learning.",
-      fr: "Un travail de recherche pour extraire des informations médicales structurées d'ordonnances marocaines manuscrites, multilingue (FR/AR), évoluant vers l'apprentissage continu.",
+      en: "Reliability-Aware OCR-Free Extraction of Structured Data from Degraded Handwritten Medical Prescriptions — a fine-tuned Donut vision-language transformer (Swin encoder, mBART decoder) that maps prescription images directly to structured JSON, trained entirely on synthetic data, with decoder-confidence selective prediction so it knows when it doesn't know.",
+      fr: "Reliability-Aware OCR-Free Extraction of Structured Data from Degraded Handwritten Medical Prescriptions — un transformeur vision-langage Donut affiné (encodeur Swin, décodeur mBART) qui convertit directement l'image d'une ordonnance en JSON structuré, entraîné entièrement sur données synthétiques, avec une prédiction sélective fondée sur la confiance du décodeur pour savoir quand s'abstenir.",
     },
     problem: {
-      en: "Handwritten Moroccan prescriptions (FR/AR) are unstructured and hard to digitize reliably.",
-      fr: "Les ordonnances marocaines manuscrites (FR/AR) sont non structurées et difficiles à numériser de façon fiable.",
+      en: "Handwritten Moroccan prescriptions (FR/AR) hold sensitive data that can't be freely collected, yet a deployable clinical extractor must know when its reading is wrong.",
+      fr: "Les ordonnances marocaines manuscrites (FR/AR) contiennent des données sensibles impossibles à collecter librement ; pourtant, un extracteur clinique déployable doit savoir quand sa lecture est erronée.",
     },
     details: {
       en: [
-        "Handwritten text recognition on real Moroccan prescriptions.",
-        "Structured information extraction into JSON, multilingual (French & Arabic).",
-        "Research-oriented architecture aimed at future personalization & continual learning.",
+        "OCR-free pipeline: a fine-tuned Donut (Swin encoder + mBART decoder) maps the raw image directly to structured JSON — no intermediate OCR, no error propagation.",
+        "A fully synthetic generator injects realistic physical degradations (projective warp, ink bleed, uneven lighting, sensor noise, stamps) with per-character handwriting jitter to bridge the sim-to-real gap.",
+        "89.4% macro exact-match and 0.922 medication-list F1 on 200 held-out images — ~80 points over a classical modular OCR baseline (87.9% vs 6.1% macro EM).",
+        "Decoder-confidence selective prediction lifts field precision from 88.0% to 98.6% at 83.5% coverage; attention is well-grounded but does not flag hallucination — confidence does.",
+        "All data are synthetic; a research proof-of-concept, not a validated medical device.",
       ],
       fr: [
-        "Reconnaissance de texte manuscrit sur de vraies ordonnances marocaines.",
-        "Extraction d'informations structurées en JSON, multilingue (français & arabe).",
-        "Architecture orientée recherche visant la personnalisation future & l'apprentissage continu.",
+        "Pipeline sans OCR : un Donut affiné (encodeur Swin + décodeur mBART) convertit l'image brute directement en JSON structuré — sans OCR intermédiaire ni propagation d'erreurs.",
+        "Un générateur entièrement synthétique injecte des dégradations physiques réalistes (déformation projective, bavures d'encre, éclairage inégal, bruit capteur, tampons) avec un jitter d'écriture par caractère pour combler l'écart sim-to-real.",
+        "89,4 % d'exact-match macro et 0,922 de F1 sur la liste de médicaments sur 200 images de test — ~80 points au-dessus d'une baseline OCR modulaire classique (87,9 % vs 6,1 % en EM macro).",
+        "La prédiction sélective par confiance du décodeur fait passer la précision des champs de 88,0 % à 98,6 % à 83,5 % de couverture ; l'attention est bien localisée mais ne détecte pas l'hallucination — la confiance, si.",
+        "Toutes les données sont synthétiques ; il s'agit d'une preuve de concept de recherche, pas d'un dispositif médical validé.",
       ],
     },
     tags: {
-      en: ["Computer Vision", "OCR", "NLP", "Research"],
-      fr: ["Vision par ordinateur", "OCR", "NLP", "Recherche"],
+      en: ["Document AI", "OCR-Free", "Donut / VLM", "Synthetic Data", "Selective Prediction"],
+      fr: ["Document AI", "Sans OCR", "Donut / VLM", "Données synthétiques", "Prédiction sélective"],
     },
     featured: true,
     badge: { en: "In progress", fr: "En cours" },
     links: [
       {
-        label: FILES,
-        href: "https://drive.google.com/drive/folders/1PO7NSu40roxmDrxqTR-hrZWLGrOOExak?usp=drive_link",
+        label: PAPER,
+        href: "/research/kayouh-ocr-free-prescription-extraction.pdf",
       },
     ],
   },
@@ -453,7 +457,7 @@ const PROJECT_ORDER = [
   "supplychain_bi.pbix", // Supply Chain BI
   "ah_chat_digital.py", // AH-Chat
   // Research & Experimental Work
-  "prescription_ocr.py", // Research Draft
+  "prescription_ocr.py", // Research Project
   "shark_tag.ipynb", // NASA Smart Shark Behaviour Tag
   "sentinel_finance.py", // ALM Surrender Risk
 ];

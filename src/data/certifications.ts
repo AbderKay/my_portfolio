@@ -15,7 +15,7 @@ export type Certification = {
   logo?: string;
 };
 
-// Certifications & recognition (14), in fixed display order.
+// Certifications & recognition (13), in fixed display order.
 // Drop a certificate image/PDF into public/certifications/<slug>/ and it fills
 // the card automatically; drop an issuer logo at public/logos/<logo>.svg.
 export const certifications: Certification[] = [
@@ -23,7 +23,6 @@ export const certifications: Certification[] = [
   { slug: "anthropic-claude-api", name: "Building with the Claude API", issuer: "Anthropic", date: "2026", logo: "anthropic" },
   { slug: "aws", name: "AWS", issuer: "Amazon Web Services", date: "2026", logo: "aws" },
   { slug: "datacamp-data-engineer", name: "Data Engineer Associate", issuer: "DataCamp", date: "2026", logo: "datacamp" },
-  { slug: "oracle-genai", name: "Generative AI - Agentic AI Foundations Professional", issuer: "Oracle Cloud Infrastructure", date: "2026", logo: "oracle" },
   { slug: "hackerrank-sql", name: "SQL (Advanced) Certificate", issuer: "HackerRank", date: "2026", logo: "hackerrank" },
   { slug: "gitex-africa", name: "AI, Data Science & ML Masterclasses", issuer: "GITEX Africa 2024", date: "2024", logo: "dwtc" },
   { slug: "ieee", name: "IEEE_conference", issuer: "IEEE / IFIP", date: "2024", logo: "ieee" },

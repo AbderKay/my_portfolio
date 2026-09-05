@@ -113,7 +113,7 @@ export function HeroPortrait() {
       {/* rotating gradient rim */}
       <div
         aria-hidden
-        className="hp-rim absolute inset-0 rounded-full opacity-90 blur-[1px]"
+        className="hp-rim absolute inset-0 rounded-full opacity-70 blur-[2px]"
         style={{
           background:
             "conic-gradient(from 90deg, var(--primary), var(--accent3), var(--accent), var(--primary))",
@@ -123,10 +123,10 @@ export function HeroPortrait() {
       {/* glassmorphism ring + circular photo (tilt target) */}
       <div
         ref={card}
-        className="glass absolute inset-[6px] rounded-full p-1 will-change-transform"
+        className="glass absolute inset-[6px] rounded-full p-[2px] will-change-transform"
         style={{
           boxShadow:
-            "0 0 0 1.5px color-mix(in srgb, var(--primary) 45%, transparent), 0 0 50px -6px var(--glow-primary), 0 0 110px -22px var(--primary), var(--shadow)",
+            "0 0 0 1px color-mix(in srgb, var(--primary) 35%, transparent), 0 0 40px -10px var(--glow-primary), 0 0 90px -28px var(--primary), var(--shadow)",
         }}
       >
         <div className="relative h-full w-full overflow-hidden rounded-full border border-line-strong bg-surface-2">
@@ -162,17 +162,6 @@ export function HeroPortrait() {
             }}
           />
         </div>
-      </div>
-
-      {/* floating depth: status badge */}
-      <div className="hp-depth absolute -bottom-2 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full border border-glass-border bg-bg/70 px-3.5 py-1.5 shadow-[var(--shadow)] backdrop-blur">
-        <span className="inline-flex items-center gap-2 font-mono text-xs text-text">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
-          </span>
-          Open to Internships
-        </span>
       </div>
     </div>
   );

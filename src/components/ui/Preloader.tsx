@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { profile } from "@/data/profile";
 import { gsap } from "@/lib/gsap";
 
-const words = ["Engineer", "Researcher", "Leader"];
+const words = ["Engineering Student", "Researcher", "Leader"];
 
 /**
  * GSAP intro preloader: a counter races 000 → 100 while a word cycles and a

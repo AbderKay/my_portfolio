@@ -62,13 +62,13 @@ export const profile = {
   // Compact hero highlights (real, traceable).
   heroStats: [
     { value: "2+", label: { en: "Internships", fr: "Stages" } as Loc },
-    { value: "1", label: { en: "Research Proposal", fr: " Pistes de recherche" } as Loc },
+    { value: "1", label: { en: "R&D projects", fr: "Projets de recherche" } as Loc },
     { value: "7", label: { en: "Team Led", fr: "Équipe dirigée" } as Loc },
   ],
   // Headline stats — every number here is real and traceable.
   stats: [
     { value: 10000, suffix: "+", label: { en: "Marine data points analysed — NASA predictive ML (Global Nominee)", fr: "Points de données marines analysés — ML prédictif NASA (nominé mondial)" } as Loc },
-    { value: 14, suffix: "", label: { en: "Professional certifications earned", fr: "Certifications professionnelles obtenues" } as Loc },
+    { value: 13, suffix: "", label: { en: "Professional certifications earned", fr: "Certifications professionnelles obtenues" } as Loc },
     { value: 7, suffix: "+", label: { en: "Projects across ML, data & full-stack", fr: "Projets en ML, data & full-stack" } as Loc },
     { value: 7, suffix: "", label: { en: "Engineers led as JEEA President", fr: "Ingénieurs encadrés en tant que président de la JEEA" } as Loc },
   ],
