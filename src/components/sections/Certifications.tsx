@@ -1,6 +1,6 @@
 "use client";
 
-import { Award, FileText } from "lucide-react";
+import { Award } from "lucide-react";
 import type { Certification } from "@/data/certifications";
 import type { GalleryImage } from "@/lib/media";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -78,18 +78,8 @@ function CertCard({ cert }: { cert: CertificationWithMedia }) {
           <p className="mt-3 text-sm leading-relaxed text-muted">{cert.description}</p>
         ) : null}
 
-        <div className="mt-auto flex items-center justify-between border-t border-line pt-4 font-mono text-xs">
+        <div className="mt-auto flex items-center border-t border-line pt-4 font-mono text-xs">
           <span className="text-faint">{cert.date}</span>
-          {cert.pdf ? (
-            <a
-              href={cert.pdf}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-muted transition-colors hover:text-primary"
-            >
-              <FileText size={12} /> {ui.certs.viewCertificate}
-            </a>
-          ) : null}
         </div>
       </div>
     </article>

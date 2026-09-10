@@ -28,7 +28,7 @@ const leadershipList: LeadershipRole[] = [
   {
     file: "communication.log",
     slug: "communication",
-    role: { en: "Event Organizer & Host", fr: "Organisateur et Animateur d'événements" },
+    role: { en: "Organizer & Communications Lead", fr: "Organisateur et Responsable Communication" },
     org: {
       en: "Smart Home Startup · Injaz Al Maghrib",
       fr: "Smart Home Startup · Injaz Al Maghrib",
