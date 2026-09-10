@@ -94,8 +94,8 @@ export const timeline: TimelineEntry[] = [
     file: "education.log",
     slug: "engineering-degree",
     role: {
-      en: "Engineering Degree — Big Data, Data Science & AI",
-      fr: "Diplôme d'ingénieur — Big Data, Data Science & IA",
+      en: "Engineering Student in Big Data, Data Science & AI",
+      fr: "Étudiant ingénieur en Big Data, Data Science & IA",
     },
     org: {
       en: "École Nationale des Sciences Appliquées (ENSA) · Agadir",

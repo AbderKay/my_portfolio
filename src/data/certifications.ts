@@ -15,12 +15,13 @@ export type Certification = {
   logo?: string;
 };
 
-// Certifications & recognition (13), in fixed display order.
+// Certifications & recognition (14), in fixed display order.
 // Drop a certificate image/PDF into public/certifications/<slug>/ and it fills
 // the card automatically; drop an issuer logo at public/logos/<logo>.svg.
 export const certifications: Certification[] = [
   { slug: "anthropic-mcp", name: "Model Context Protocol: Advanced Topics", issuer: "Anthropic", date: "2026", logo: "anthropic" },
   { slug: "anthropic-claude-api", name: "Building with the Claude API", issuer: "Anthropic", date: "2026", logo: "anthropic" },
+  { slug: "pmi-genai", name: "Generative AI Overview for Project Managers", issuer: "Project Management Institute", date: "2026", logo: "pmi" },
   { slug: "aws", name: "AWS", issuer: "Amazon Web Services", date: "2026", logo: "aws" },
   { slug: "datacamp-data-engineer", name: "Data Engineer Associate", issuer: "DataCamp", date: "2026", logo: "datacamp" },
   { slug: "hackerrank-sql", name: "SQL (Advanced) Certificate", issuer: "HackerRank", date: "2026", logo: "hackerrank" },

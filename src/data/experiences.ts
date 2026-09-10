@@ -9,6 +9,9 @@ export const experienceCaptions: Record<string, Record<string, string>> = {
   "vala-bleu": {
     "01.jpg": "",
   },
+  "ensa-research": {
+    "01.png": "",
+  },
   "ai-intern": {
     "01.png": "",
     "02.jpeg": "",
