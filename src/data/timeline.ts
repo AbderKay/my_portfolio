@@ -56,7 +56,7 @@ export const timeline: TimelineEntry[] = [
       en: "École Nationale des Sciences Appliquées (ENSA) · Agadir",
       fr: "École Nationale des Sciences Appliquées (ENSA) · Agadir",
     },
-    period: { en: "In progress", fr: "En cours" },
+    period: { en: "2026", fr: "2026" },
     points: {
       en: [
         "Research work to extract structured medical information from handwritten Moroccan prescriptions, multilingual (FR/AR), evolving toward continual learning.",

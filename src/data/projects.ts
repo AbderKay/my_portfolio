@@ -274,7 +274,7 @@ const projectList: Project[] = [
       fr: "Research Project",
     },
     category: "R&D",
-    year: { en: "In progress", fr: "En cours" },
+    year: { en: "2026", fr: "2026" },
     context: {
       en: "Independent research project · Document AI",
       fr: "Projet de recherche indépendant · Document AI",
@@ -308,7 +308,6 @@ const projectList: Project[] = [
       fr: ["Document AI", "Sans OCR", "Donut / VLM", "Données synthétiques", "Prédiction sélective"],
     },
     featured: true,
-    badge: { en: "In progress", fr: "En cours" },
     links: [
       {
         label: PAPER,
@@ -326,7 +325,7 @@ const projectList: Project[] = [
       fr: "Vala Bleu Ops Copilot — RAG agentique & MLOps",
     },
     category: "NLP & LLM",
-    year: { en: "In progress", fr: "En cours" },
+    year: { en: "2026", fr: "2026" },
     context: {
       en: "PFA · Internship — Vala Bleu, Agadir",
       fr: "PFA · Stage — Vala Bleu, Agadir",
@@ -360,7 +359,6 @@ const projectList: Project[] = [
       fr: ["Python", "FastAPI", "LangChain", "pgvector", "RAGAS", "Docker"],
     },
     featured: true,
-    badge: { en: "In progress", fr: "En cours" },
   },
   {
     // Keeps file + slug so the existing Sentinel Finance card image
