@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { profile } from "@/data/profile";
 import { ThemeProvider, themeScript } from "@/components/theme/ThemeProvider";
+import { bootGuardScript } from "@/lib/bootGuard";
+import { BootSignal } from "@/components/providers/BootSignal";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { SpaceBackground } from "@/components/providers/SpaceBackground";
 import { LightboxProvider } from "@/components/ui/Lightbox";
@@ -91,8 +93,12 @@ export default function RootLayout({
       <head>
         {/* Sets theme before first paint — prevents any flash of the wrong theme. */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {/* Recovers a blank page after a new deploy: reloads once if a JS/CSS
+            chunk fails to load or the app never boots (see lib/bootGuard.ts). */}
+        <script dangerouslySetInnerHTML={{ __html: bootGuardScript }} />
       </head>
       <body>
+        <BootSignal />
         <Preloader />
         <a
           href="#main"
